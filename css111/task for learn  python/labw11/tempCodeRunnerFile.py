@@ -1,0 +1,2 @@
+
+print(txt1)

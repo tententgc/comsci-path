@@ -1,0 +1,1 @@
+for /L %%a in (1,1,200) do md folder%%a
