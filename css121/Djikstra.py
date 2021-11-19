@@ -30,7 +30,7 @@
 # }
 
 graph = { 
-     'a': {'b': 1, 'c': 2, 'd': 3},
+     'a': {'b':1, 'c': 2, 'd': 3},
      'b':{'a':1,'c':5,'b':3},
      'c':{'a':2,'b':5,'d':5,'e':5,'f':2,'g':4},
      'd':{'a':3,'c':5,'g':4},
@@ -44,9 +44,11 @@ graph = {
 }
 
 
+
+
 def dijkstra(graph, start, goal): 
-    shortest_distance = {}
-    track_predecessor = {}
+    shortest_distance = {} #creating a dictionary to store shortest distance
+    track_predecessor = {} 
     unseenNodes = graph
     infinity = 9999999
     track_path= []
@@ -87,4 +89,4 @@ def dijkstra(graph, start, goal):
     if shortest_distance[goal] != infinity:
         print('Shortest distance is ' + str(shortest_distance[goal]))
         print('Path is ' + str(track_path))
-dijkstra(graph, 'a', 'k')
+dijkstra(graph, 'a', 'i')
