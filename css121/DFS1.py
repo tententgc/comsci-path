@@ -1,14 +1,37 @@
-def find_all_paths(graph, start, end, path=[]):
-    path = path + [start]
-    print ('adding %d'%start)
-    if start == end:
-        return [path]
-    paths = []
-    for node in graph[start]:
-        if node not in path:
-            paths.extend(find_all_paths(graph, node, end, path))
-    print( 'returning ' + str(paths))
-    return paths
+start,stop = input().split()
+count =  0
+ 
 
-G = {1:[2,3,4,6], 2:[1,4,6], 3:[1,2], 4:[1,2,3,5,6], 5:[4,6],6:[4] }
-find_all_paths(G, 1, 6)
+# graph = {
+#     'A': ['B', 'C'],
+#     'B': ['D', 'E','A','H'],
+#     'C': ['F', 'G'],
+#     'D': ['F'],
+#     'E': ['H'],
+#     'F': ['H'],
+#     'G': ['H'],
+#     'H': ['A']
+# }
+
+
+graph = {
+    'A': ['B', 'C', 'D'],
+    'B': ['E', 'F', 'D'],
+    'C': ['F', 'G'],
+    'D': ['H'],
+    'E': ['H'],
+    'F': ['H'],
+    'G': ['H'],
+    'H': []
+}
+
+def find_path(start,stop,graph, now = start , path = start):
+    global count
+    if now == stop:
+        count += 1
+        print('ways = ', count , ":" ,*[i for i in path]) 
+        return
+    for i in graph[now]:
+        find_path(start,stop,graph,i,path+i)
+
+find_path(start,stop,graph)

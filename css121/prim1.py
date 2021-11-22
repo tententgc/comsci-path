@@ -1,26 +1,35 @@
-def find_all_paths(graph, start, end, path=[]):
-    path = path + [start]
-    if start == end:  # if start is the same as end, then we have found a path
-        return [path]
-    paths = []
-    for node in graph[start]:  # loop dict in graph
-        if node not in path:
-            # print("node" , node)
-            paths.extend(find_all_paths(graph, node, end, path))
-    # print("before" , paths)
-    return paths
+#prim's algorithm
+
+graph = [[0, 19, 5, 0, 0],
+     [19, 0, 5, 9, 2],
+     [5, 5, 0, 1, 6],
+     [0, 9, 1, 0, 1],
+     [0, 2, 6, 1, 0]]
+def primalgorithm(graph):
+    #graph = [[0, 19, 5, 0, 0],
+    #     [19, 0, 5, 9, 2],
+    #     [5, 5, 0, 1, 6],
+    #     [0, 9, 1, 0, 1],
+    #     [0, 2, 6, 1, 0]]
+    n = len(graph)
+    visited = [False] * n
+    visited[0] = True
+    mincost = 0
+    path = []
+    for i in range(n-1):
+        mincost = 10000000
+        for j in range(n):
+            if not visited[j]:
+                if graph[i][j] < mincost:
+                    mincost = graph[i][j]
+                    minindex = j
+        visited[minindex] = True
+        for k in range(n):
+            if graph[minindex][k] < graph[minindex][i]:
+                graph[minindex][i] = graph[minindex][k]
+        path.append([minindex, i])
+        print(graph)
+    return path
 
 
-G = {1: [2, 3, 4, 6],
-     2: [1, 4, 6],
-     3: [1, 2],
-     4: [1, 2, 3, 5, 6],
-     5: [4, 6], 6: [4]}
-
-q = find_all_paths(G, 1, 6)
-x = 1
-for i in q:
-    print(f'{x:2} ways  = ', *(i))
-    x += 1
-
-
+print(primalgorithm(graph))
