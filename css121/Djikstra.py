@@ -86,6 +86,9 @@ def dijkstra(graph, start, goal):
     
     track_path.insert(0, start) 
 
+
+
+
     if shortest_distance[goal] != infinity:
         print('Shortest distance is ' + str(shortest_distance[goal]))
         print('Path is ' + str(track_path))
