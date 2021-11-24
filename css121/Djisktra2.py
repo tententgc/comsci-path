@@ -29,64 +29,75 @@
 #     'z':{'p5':6, 'p6':3}
 # }
 
-graph = { 
-     'a': {'b':1, 'c': 2, 'd': 3},
-     'b':{'a':1,'c':5,'b':3},
-     'c':{'a':2,'b':5,'d':5,'e':5,'f':2,'g':4},
-     'd':{'a':3,'c':5,'g':4},
-     'e':{'b':3,'c':5,'f':3,'h':2},
-     'f':{'c':2,'e':3,'g':4,'h':1},
-     'g':{'c':4,'d':4,'f':4,'h':2},
-     'h':{'e':2,'f':1,'g':2,"i":5,'j':5,'k':3},
-     'i':{'h':5,'k':4},
-     'j':{'h':5,'k':3},
-     'k':{'h':3,'i':4,'j':3}
+graph = {
+    'a': {'b': 1, 'c': 2, 'd': 3},
+    'b': {'a': 1, 'c': 5},
+    'c': {'a': 2, 'b': 5, 'd': 5, 'e': 5, 'f': 2, 'g': 4},
+    'd': {'a': 3, 'c': 5, 'g': 4},
+    'e': {'b': 3, 'c': 5, 'f': 3, 'h': 2},
+    'f': {'c': 2, 'e': 3, 'g': 4, 'h': 1},
+    'g': {'c': 4, 'd': 4, 'f': 4, 'h': 2},
+    'h': {'e': 2, 'f': 1, 'g': 2, "i": 5, 'j': 5, 'k': 3},
+    'i': {'h': 5, 'k': 4},
+    'j': {'h': 5, 'k': 3},
+    'k': {'h': 3, 'i': 4, 'j': 3}
 }
 
 
-
-
-def dijkstra(graph, start, goal): 
-    shortest_distance = {} #creating a dictionary to store shortest distance
-    track_predecessor = {} 
-    unseenNodes = graph
-    infinity = 9999999
-    track_path= []
+def dijkstra(graph, start, goal):
+    shortest_distance = {}  # creating a dictionary to store shortest distance
+    track_predecessor = {} #keep track of the path
+    unseenNodes = graph #to iterate through the graph
+    infinity = 9999999 #infinity can a large number
+    track_path = [] #going to trace our journey
     path = []
 
     for node in unseenNodes:
-        shortest_distance[node] = infinity 
+        shortest_distance[node] = infinity
         shortest_distance[start] = 0
-    
+
     while unseenNodes:
         min_distance_node = None
-        
+
         for node in unseenNodes:
+            # print()
+            # print("unseenNodes: ", unseenNodes)
+            # print("shortest_distance: ", shortest_distance)
+            # print("min_distance_node: ", min_distance_node)
+            # print("track_predecessor: ", track_predecessor)
+            # print('node', node)
+            # print()
             if min_distance_node is None:
-                min_distance_node = node 
-            elif shortest_distance[node] < shortest_distance[min_distance_node]:
                 min_distance_node = node
-        
+            elif shortest_distance[node] < shortest_distance[min_distance_node]:
+                # print(f"short {shortest_distance[node]} : mindis  {shortest_distance[min_distance_node]}")
+                min_distance_node = node
+
         path_options = graph[min_distance_node].items()
+        # print("path_options: ", path_options)
 
         for child_node, weight in path_options:
+            # print('weight + shortest distance[min_distanc_node]' , weight + shortest_distance[min_distance_node])
             if weight + shortest_distance[min_distance_node] < shortest_distance[child_node]:
                 shortest_distance[child_node] = weight + shortest_distance[min_distance_node]
                 track_predecessor[child_node] = min_distance_node
-
+            
         unseenNodes.pop(min_distance_node)
     currentNode = goal
     while currentNode != start:
         try:
             track_path.insert(0, currentNode)
             currentNode = track_predecessor[currentNode]
+
         except KeyError:
             print('Path not reachable')
             break
-    
-    track_path.insert(0, start) 
+
+    track_path.insert(0, start)
 
     if shortest_distance[goal] != infinity:
         print('Shortest distance is ' + str(shortest_distance[goal]))
         print('Path is ' + str(track_path))
+
+
 dijkstra(graph, 'a', 'k')
