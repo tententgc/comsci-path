@@ -2,9 +2,9 @@ INF = 9999999
 # number of vertices in graph
 N = 5
 #creating graph by adjacency matrix method
-G = [[0, 19, 5, 0, 0],
-     [19, 0, 5, 9, 2],
-     [5, 5, 0, 1, 6],
+G = [[0, 6, 5, 0, 0],
+     [19, 0, 5, 5, 4],
+     [5, 5, 1, 1, 6],
      [0, 9, 1, 0, 1],
      [0, 2, 6, 1, 0]]
 

@@ -48,7 +48,7 @@ def dijkstra(graph, start, goal):
     shortest_distance = {}  # creating a dictionary to store shortest distance
     track_predecessor = {} #keep track of the path
     unseenNodes = graph #to iterate through the graph
-    infinity = 9999999 #infinity can a large number
+    infinity = float("inf")  # infinity can a large number
     track_path = [] #going to trace our journey
     path = []
 
@@ -58,26 +58,26 @@ def dijkstra(graph, start, goal):
 
     while unseenNodes:
         min_distance_node = None
-
+        
         for node in unseenNodes:
-            # print()
+            print()
             # print("unseenNodes: ", unseenNodes)
-            # print("shortest_distance: ", shortest_distance)
-            # print("min_distance_node: ", min_distance_node)
-            # print("track_predecessor: ", track_predecessor)
-            # print('node', node)
-            # print()
+            print("shortest_distance: ", shortest_distance)
+            print("min_distance_node: ", min_distance_node)
+            print("track_predecessor: ", track_predecessor)
+            print('node', node)
+            print()
             if min_distance_node is None:
                 min_distance_node = node
             elif shortest_distance[node] < shortest_distance[min_distance_node]:
-                # print(f"short {shortest_distance[node]} : mindis  {shortest_distance[min_distance_node]}")
+                print(f"short {shortest_distance[node]} : mindis  {shortest_distance[min_distance_node]}")
                 min_distance_node = node
 
         path_options = graph[min_distance_node].items()
-        # print("path_options: ", path_options)
+        print("path_options: ", path_options)
 
         for child_node, weight in path_options:
-            # print('weight + shortest distance[min_distanc_node]' , weight + shortest_distance[min_distance_node])
+            print('weight + shortest distance[min_distanc_node]' , weight + shortest_distance[min_distance_node])
             if weight + shortest_distance[min_distance_node] < shortest_distance[child_node]:
                 shortest_distance[child_node] = weight + shortest_distance[min_distance_node]
                 track_predecessor[child_node] = min_distance_node
