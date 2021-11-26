@@ -10,6 +10,7 @@ G = [[0, 6, 5, 0, 0],
 
 selected_node = [0, 0, 0, 0, 0]
 
+
 no_edge = 0
 
 selected_node[0] = True
@@ -17,7 +18,6 @@ selected_node[0] = True
 # printing for edge and weight
 print("Edge : Weight\n")
 while (no_edge < N - 1):
-
     minimum = INF
     a = 0
     b = 0

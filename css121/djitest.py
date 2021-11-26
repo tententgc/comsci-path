@@ -15,26 +15,25 @@ graph = {
 
 def djikstra(graph, start, end):
     shortways = {}  # ทางที่สั้นที่สุด
-    back = {}  # ทางกลับบ้าน (จุดstart )
+    back = {}  # ทางกลับบ้าน (จุดstart)
     unseenNodes = graph  # จุดที่ยังไม่ได้ดำเนินการ
-    inf = 9999999
+    inf = float('inf')  # ค่าที่ไม่มีค่า
     path = []  # ทางที่เคยผ่านไปแล้ว
 
-    # สร้างways ให้เป็น infinity เพื่อมาแก้ไขหาค่าน้อยสุเ
+    # สร้างways ให้เป็น infinity เพื่อมาแก้ไขหาค่าน้อยสุด
     for node in unseenNodes:
-        shortways[node] = 9999999
+        shortways[node] = inf
         shortways[start] = 0
 
     while unseenNodes:
         mindis = None
-
         # เช็คในทางเดินว่าไปทางไหนง่ายสุด
+        # print(shortways)
         for node in unseenNodes:
-            if mindis is None:
+            if mindis is None or shortways[node] < shortways[mindis]:
                 mindis = node
-            elif shortways[node] < shortways[mindis]:
-                mindis = node
-
+            # print(mindis)
+            # print(shortways[node],shortways[mindis])
         pdict = graph[mindis].items()
 
         # เช็คว่าผลรวมน้ำหนักของทางที่เดินน้อยกว่าทางที่เดินกลับบ้าน
@@ -42,17 +41,22 @@ def djikstra(graph, start, end):
             if w + shortways[mindis] < shortways[node1]:
                 shortways[node1] = w + shortways[mindis]
                 back[node1] = mindis
-
         unseenNodes.pop(mindis)
 
     now = end
     while now != start:
-        path.insert(0, now)
-        now = back[now]
-        
+        try: 
+            path.insert(0, now)
+            now = back[now]
+        except KeyError:
+            print('no path')
+            break
+    
     path.insert(0, start)
     if shortways[end] != inf:
         print(str(shortways[end]) + " " + (str(path)))
 
 
 djikstra(graph, 'a', 'k')
+
+
