@@ -1,35 +1,12 @@
-#prim's algorithm
+def prim(graph, start):
+    mst = set()
+    visited = {start}
+    nodes, edges = graph
 
-graph = [[0, 19, 5, 0, 0],
-     [19, 0, 5, 9, 2],
-     [5, 5, 0, 1, 6],
-     [0, 9, 1, 0, 1],
-     [0, 2, 6, 1, 0]]
-def primalgorithm(graph):
-    #graph = [[0, 19, 5, 0, 0],
-    #     [19, 0, 5, 9, 2],
-    #     [5, 5, 0, 1, 6],
-    #     [0, 9, 1, 0, 1],
-    #     [0, 2, 6, 1, 0]]
-    n = len(graph)
-    visited = [False] * n
-    visited[0] = True
-    mincost = 0
-    path = []
-    for i in range(n-1):
-        mincost = 10000000
-        for j in range(n):
-            if not visited[j]:
-                if graph[i][j] < mincost:
-                    mincost = graph[i][j]
-                    minindex = j
-        visited[minindex] = True
-        for k in range(n):
-            if graph[minindex][k] < graph[minindex][i]:
-                graph[minindex][i] = graph[minindex][k]
-        path.append([minindex, i])
-        print(graph)
-    return path
+    while len(visited) != len(nodes):
+        possible_edges = (e for e in edges if e[0] in visited and e[1] not in visited)
+        cheapest_edge = min(possible_edges, key=lambda x: x[2])
+        mst.add(cheapest_edge)
+        visited.add(cheapest_edge[1])
 
-
-print(primalgorithm(graph))
+    return mst
