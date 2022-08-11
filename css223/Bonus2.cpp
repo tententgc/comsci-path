@@ -32,7 +32,6 @@ int main(){
     }
 
 
-
     int Taxicab = abs(4 - 6) + abs(0 - 4);
     cout << "Taxicab: " << Taxicab << endl;
 
