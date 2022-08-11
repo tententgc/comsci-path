@@ -17,7 +17,3 @@ public class Main {
 
 }
 
-class IdentifyMyParts{
-    public static int x = 7;
-    public int y = 3;
-}
