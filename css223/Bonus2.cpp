@@ -38,6 +38,8 @@ int main(){
     double Euclidean = sqrt(pow(4 - 6, 2) + pow(0 - 4, 2));
     cout << "Euclidean: " << Euclidean << endl;
 
+    
+
     double Chebyshev = max(abs(4 - 6), abs(0 - 4));
     cout << "Chebyshev: " << Chebyshev << endl;
 }
