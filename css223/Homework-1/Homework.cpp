@@ -1,22 +1,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream> // for file input file to read csv file
+#include <fstream>
 
-using namespace std; 
+using namespace std;
 
-int main(){
-    
-    string myFilePath = "./mbti.csv";
-    ifstream myFile(myFilePath); // open file
+struct
+{                    
+    string name;
+    double Ne;
+    double Ni;
+    double Te;
+    double Ti;
+    double Se;
+    double Si; 
+    double Fe;
+    double Fi;
+    string Type;
+} Element;
+
+int main(){ 
+    ifstream inFile;
+    inFile.open("mbti.csv");
     string line;
-    vector<string> myVector;
-    
-    while(getline(myFile, line)){ // read line by line
-        myVector.push_back(line);
+    vector<string> lines;
+    while (getline(inFile, line)){
+        lines.push_back(line);
     }
-    myFile.close(); // close file
-
-
-    return 0; 
+    inFile.close();
+    
+    return 0;
 }
