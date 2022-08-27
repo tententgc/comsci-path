@@ -21,6 +21,7 @@ struct TypeFriend{
     string type;
 };
 
+
 int main()
 { 
     ifstream inFile; 
@@ -76,29 +77,112 @@ int main()
         arr.push_back(distance);
     }
 
-    // sort the distance array and find the top 3 nearest friend show name and type
-    vector<double> sorted = arr;
-    sort(sorted.begin(), sorted.end());
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < arr.size(); j++){
-            if (arr[j] == sorted[i]){
-                cout << types[j].name << " " << types[j].type << endl;
-            }
+    
+    string Typeout[3] = {};
+    double minnum = arr[0]; 
+    string nameOut = types[0].name; 
+    Typeout[0] = types[0].type; 
+
+    for (int i = 0; i < arr.size(); i++){ 
+        if (arr[i] < minnum){ 
+            minnum = arr[i]; 
+            Typeout[0] = types[i].type; 
+            nameOut = types[i].name; 
+        } 
+    }
+    cout << nameOut << " is a " << Typeout[0] << endl;
+
+
+
+    double check = minnum;
+    double minnum2 = arr[0];
+
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] < minnum2 and arr[i] > check)
+        {
+            minnum2 = arr[i];
+            Typeout[1] = types[i].type;
+            nameOut = types[i].name;
         }
     }
+    cout << nameOut << " is a " << Typeout[1] << endl;
 
-    // find my mbti type from top 3 nearest friend
-    vector<string> mbti;
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < arr.size(); j++){
-            if (arr[j] == sorted[i]){
-                mbti.push_back(types[j].type);
-            }
+    double check2 = minnum2;
+    double minnum3 = arr[0];
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] < minnum3 and arr[i] > check2)
+        {
+            minnum3 = arr[i];
+            Typeout[2] = types[i].type;
+            nameOut = types[i].name;
         }
     }
-    
-    
+    cout << nameOut << " is a " << Typeout[2] << endl;
 
+    //create my type from Typeout and print out my type
+    string myType = "";
+    int count[4] = {0,0,0,0};
+    for (int i = 0; i < 3; i++)
+    {
+        if (Typeout[i][0] == 'E'){ 
+            count[0]++; 
+        }
+        else if (Typeout[i][0] == 'I'){
+            count[0]++;
+        }
 
+        if (Typeout[i][1] == 'S'){
+            count[1]++;
+        }
+        else if (Typeout[i][1] == 'N'){
+            count[1]++;
+        }
+
+        if (Typeout[i][2] == 'T'){
+            count[2]++;
+        }
+        else if (Typeout[i][2] == 'F'){
+            count[2]++;
+        }
+
+        if (Typeout[i][3] == 'J'){
+            count[3]++;
+        }
+        else if (Typeout[i][3] == 'P'){
+            count[3]++;
+        }
+    } 
+
+    if (count[0]>1){
+        myType += "E";
+    }
+    else{ 
+        myType += "I";
+    }
+
+    if (count[1]>1){
+        myType += "S";
+    }
+    else{
+        myType += "N";
+    }
+
+    if (count[2]>1){
+        myType += "T";
+    }
+    else{
+        myType += "F";
+    }
+
+    if (count[3]>1){
+        myType += "J";
+    }
+    else{
+        myType += "P";
+    }
+
+    cout << "My type is " << myType << endl;
 
 }
