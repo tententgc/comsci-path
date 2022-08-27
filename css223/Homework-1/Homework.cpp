@@ -5,20 +5,6 @@
 
 using namespace std;
 
-struct
-{                    
-    string name;
-    double Ne;
-    double Ni;
-    double Te;
-    double Ti;
-    double Se;
-    double Si; 
-    double Fe;
-    double Fi;
-    string Type;
-} Element;
-
 int main(){ 
     ifstream inFile;
     inFile.open("mbti.csv");
@@ -28,6 +14,11 @@ int main(){
         lines.push_back(line);
     }
     inFile.close();
+
+    for (int i = 0; i < lines.size(); i++){
+        cout << lines[i] << endl;
+    }
+    
     
     return 0;
 }
