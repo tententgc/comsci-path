@@ -21,3 +21,7 @@ SELECT * FROM address WHERE address2 IS NOT NULL;
 select * from city WHERE city LIKE 'a%' and city LIKE '%a';
 select * from city WHERE city LIKE 'a%' OR city LIKE '%a';
 
+select rental_id,return_date from rental WHERE return_date like '2005-06%';
+
+select rental_id,rental_date , staff_id from rental where return_date;
+

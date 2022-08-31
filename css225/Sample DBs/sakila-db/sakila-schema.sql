@@ -1,4 +1,4 @@
-actor-- Sakila Sample Database Schema
+-- Sakila Sample Database Schema
 -- Version 1.3
 
 -- Copyright (c) 2006, 2022, Oracle and/or its affiliates.
