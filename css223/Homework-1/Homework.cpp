@@ -63,126 +63,60 @@ int main()
     }
     // calculate the distance between each friend and the user 
     vector<double> arr;
-    for (int i = 1; i < types.size(); i++){
-        double distance = 0;
-        distance += pow(types[i].Ne - types[0].Ne, 2);
-        distance += pow(types[i].Ni - types[0].Ni, 2);
-        distance += pow(types[i].Te - types[0].Te, 2);
-        distance += pow(types[i].Ti - types[0].Ti, 2);
-        distance += pow(types[i].Se - types[0].Se, 2);
-        distance += pow(types[i].Si - types[0].Si, 2);
-        distance += pow(types[i].Fe - types[0].Fe, 2);
-        distance += pow(types[i].Fi - types[0].Fi, 2);
-        distance = sqrt(distance);
-        arr.push_back(distance);
+    for (int i = 0; i < types.size(); i++){
+        double temp = sqrt(pow(types[i].Ne - types[0].Ne, 2) + pow(types[i].Ni - types[0].Ni, 2) + pow(types[i].Te - types[0].Te, 2) + pow(types[i].Ti - types[0].Ti, 2) + pow(types[i].Se - types[0].Se, 2) + pow(types[i].Si - types[0].Si, 2) + pow(types[i].Fe - types[0].Fe, 2) + pow(types[i].Fi - types[0].Fi, 2));
+        arr.push_back(temp);
     }
 
-    
-    string Typeout[3] = {};
-    double minnum = arr[0]; 
-    string nameOut = types[0].name; 
-    Typeout[0] = types[0].type; 
-
-    for (int i = 0; i < arr.size(); i++){ 
-        if (arr[i] < minnum){ 
-            minnum = arr[i]; 
-            Typeout[0] = types[i].type; 
-            nameOut = types[i].name; 
-        } 
-    }
-    cout << nameOut << " is a " << Typeout[0] << endl;
-
-
-
-    double check = minnum;
-    double minnum2 = arr[0];
-
-    for (int i = 0; i < arr.size(); i++)
-    {
-        if (arr[i] < minnum2 and arr[i] > check)
-        {
-            minnum2 = arr[i];
-            Typeout[1] = types[i].type;
-            nameOut = types[i].name;
+    // find the closest 3 friends and print their names
+    string type1 = "" , type2 = "", type3 = ""; 
+    int min1 = 1, min2 = 1, min3 = 1;
+    for (int i = 1; i < arr.size(); i++){
+        if (arr[i] < arr[min1]){
+            min3 = min2;
+            min2 = min1;
+            min1 = i;
+        }
+        else if (arr[i] < arr[min2]){
+            min3 = min2;
+            min2 = i;
+        }
+        else if (arr[i] < arr[min3]){
+            min3 = i;
         }
     }
-    cout << nameOut << " is a " << Typeout[1] << endl;
+    cout << types[min1].name << " is a " << types[min1].type << endl;
+    cout << types[min2].name << " is a " << types[min2].type << endl;
+    cout << types[min3].name << " is a " << types[min2].type << endl;
 
-    double check2 = minnum2;
-    double minnum3 = arr[0];
-    for (int i = 0; i < arr.size(); i++)
-    {
-        if (arr[i] < minnum3 and arr[i] > check2)
-        {
-            minnum3 = arr[i];
-            Typeout[2] = types[i].type;
-            nameOut = types[i].name;
-        }
-    }
-    cout << nameOut << " is a " << Typeout[2] << endl;
+
 
     //create my type from Typeout and print out my type
+    string Typeout[3] = {types[min1].type, types[min2].type, types[min3].type};
     string myType = "";
-    int count[4] = {0,0,0,0};
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 8; i++)
     {
-        if (Typeout[i][0] == 'E'){ 
-            count[0]++; 
+        if (Typeout[0][i] == Typeout[1][i] and Typeout[0][i] == Typeout[2][i])
+        {
+            myType += Typeout[0][i];
         }
-        else if (Typeout[i][0] == 'I'){
-            count[0]++;
+        else if (Typeout[0][i] == Typeout[1][i])
+        {
+            myType += Typeout[0][i];
         }
-
-        if (Typeout[i][1] == 'S'){
-            count[1]++;
+        else if (Typeout[0][i] == Typeout[2][i])
+        {
+            myType += Typeout[0][i];
         }
-        else if (Typeout[i][1] == 'N'){
-            count[1]++;
+        else if (Typeout[1][i] == Typeout[2][i])
+        {
+            myType += Typeout[1][i];
         }
-
-        if (Typeout[i][2] == 'T'){
-            count[2]++;
+        else
+        {
+            myType += "x";
         }
-        else if (Typeout[i][2] == 'F'){
-            count[2]++;
-        }
-
-        if (Typeout[i][3] == 'J'){
-            count[3]++;
-        }
-        else if (Typeout[i][3] == 'P'){
-            count[3]++;
-        }
-    } 
-
-    if (count[0]>1){
-        myType += "E";
     }
-    else{ 
-        myType += "I";
-    }
-
-    if (count[1]>1){
-        myType += "S";
-    }
-    else{
-        myType += "N";
-    }
-
-    if (count[2]>1){
-        myType += "T";
-    }
-    else{
-        myType += "F";
-    }
-
-    if (count[3]>1){
-        myType += "J";
-    }
-    else{
-        myType += "P";
-    }
-
-    cout << "My type is " << myType << endl;
-
+    cout << "your type is " << myType << endl;
+    return 0;
 }

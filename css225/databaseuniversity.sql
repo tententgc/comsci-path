@@ -1,9 +1,8 @@
 use University ;
-select * from advisor;
-select name,title from student natural join takes,course where takes.course_id = course.course_id; 
-select name,title from student natural join takes natural join course; 
 
 
-select name,course_id from instructor,teaches where instructor.id = teaches.id;
+select distinct I.ID, I.NAME, (Select count(*) from teaches as T where I.ID = T.ID) as "number of sections" from instructor as I;
 
-select * from student natural join takes;
+select name, course_id, sec_id from instructor AS I, teaches as T where semester = "Spring" AND year = 2010 and I.ID = T.ID;
+
+select distinct dept_name, count(dept_name) as "number of instructor" from instructor as I group by I.dept_name;
