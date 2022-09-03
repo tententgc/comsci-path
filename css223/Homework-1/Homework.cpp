@@ -120,3 +120,8 @@ int main()
     cout << "your type is " << myType << endl;
     return 0;
 }
+
+
+// Language: cpp
+// Path: mbti.csv
+// Big(O) = O(n)
