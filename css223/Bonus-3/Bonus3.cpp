@@ -2,137 +2,117 @@
 #include <string>
 using namespace std;
 
-//create scoreboard top10 with doubly linked list if the score is higher than the lowest score in the top10 list delete the lowest score and add the new score
-//create a function to print the top10 list
-//create a function to check if the score is higher than the lowest score in the top10 list
-//create a function to delete the lowest score in the top10 list
-//create a function to add the new score to the top10 list
+//create scoreboard top 10 with doubly linked list
+// when add newscore to scoreboard, it will be added to the right position
+// and the lowest score will be removed
 
-class Score
+class Node
 {
 public:
-	Score(string n, int s);
-	string name;
-	int score;
-	Score *next;
-	Score *prev;
+    Node* next;
+    Node* prev;
+    int score;
+    string name;
+    Node(int score, string name)
+    {
+        this->score = score;
+        this->name = name;
+        next = NULL;
+        prev = NULL;
+    }
 };
-
-Score::Score(string n, int s)
-{
-	name = n;
-	score = s;
-	next = NULL;
-	prev = NULL;
-}
 
 class ScoreBoard
 {
 public:
-	ScoreBoard();
-	~ScoreBoard();
-	void print();
-	bool checkScore(int s);
-	void addScore(string n, int s);
-private:
-	Score *head;
-	Score *tail;
-};
-
-ScoreBoard::ScoreBoard()
-{
-	head = NULL;
-	tail = NULL;
-}
-
-ScoreBoard::~ScoreBoard()
-{
-	Score *current = head;
-	while (current != NULL)
-	{
-		Score *temp = current;
-		current = current->next;
-		delete temp;
-	}
-}
-
-void ScoreBoard::print()
-{
-	Score *current = head;
-	while (current != NULL)
-	{
-		cout << current->name << ": " << current->score << endl;
-		current = current->next;
-	}
-}
-
-bool ScoreBoard::checkScore(int s)
-{
-	Score *current = head;
-	if (s > current->score)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void ScoreBoard::addScore(string n, int s)
-{
-	Score *newScore = new Score(n, s);
-	if (head == NULL)
-	{
-		head = newScore;
-		tail = newScore;
-	}
-	else
-	{
-		Score *current = head;
-		while (current != NULL)
-		{
-			if (s > current->score)
-			{
-				newScore->next = current;
-				current->prev = newScore;
-				head = newScore;
-				break;
-			}
-			else if (current->next == NULL)
-			{
-				current->next = newScore;
-				newScore->prev = current;
-				tail = newScore;
-				break;
-			}
-			else if (s < current->score && s > current->next->score)
-			{
-				newScore->next = current->next;
-                current->next->prev = newScore;
-                current->next = newScore;
-                newScore->prev = current;
-                break;
+    Node* head;
+    Node* tail;
+    int count;
+    ScoreBoard()
+    {
+        head = NULL;
+        tail = NULL;
+        count = 0;
+    }
+    void addScore(int score, string name)
+    {
+        Node* newNode = new Node(score, name);
+        Node* cur = head;
+        if (head == NULL)
+        {
+            head = newNode;
+            tail = newNode;
+            count++;
+            return;
+        }
+        if (head->score < score)
+        {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+            count++;
+            return;
+        }
+        if (tail->score > score)
+        {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+            count++;
+            if (count > 10)
+            {
+                tail = tail->prev;
+                tail->next = NULL;
             }
-            current = current->next;
+            return;
+        }
+        while (cur->next != NULL)
+        {
+            if (cur->next->score < score)
+            {
+                newNode->next = cur->next;
+                cur->next->prev = newNode;
+                cur->next = newNode;
+                newNode->prev = cur;
+                count++;
+                if (count > 10)
+                {
+                    tail = tail->prev;
+                    tail->next = NULL;
+                }
+                return;
+            }
+            else
+            {
+                cur = cur->next;
+            }
         }
     }
-}
+    void printScoreBoard()
+    {
+        Node* cur = head;
+        int i = 1;
+        while (cur != NULL)
+        {
+            cout << i << ". " << cur->name << " : " << cur->score << endl;
+            cur = cur->next;
+            i++;
+        }
+    }
+};
 
-int main(){ 
-    ScoreBoard *scoreboard = new ScoreBoard();
-    scoreboard->addScore("John", 100);
-    scoreboard->addScore("Mary", 200);
-    scoreboard->addScore("Tom", 300);
-    scoreboard->addScore("Bob", 400);
-    scoreboard->addScore("Alice", 500);
-    scoreboard->addScore("Peter", 600);
-    scoreboard->addScore("Jack", 700);
-    scoreboard->addScore("Lily", 800);
-    scoreboard->addScore("Jane", 900);
-    scoreboard->addScore("Mike", 1000);
-    scoreboard->addScore("Tom", 790);
-    scoreboard->print();
-    cout << endl;
-
+int main()
+{
+    ScoreBoard* s = new ScoreBoard();
+    s->addScore(100, "aaa");
+    s->addScore(200, "bbb");
+    s->addScore(150, "ccc");
+    s->addScore(250, "ddd");
+    s->addScore(300, "eee");
+    s->addScore(50, "fff");
+    s->addScore(400, "ggg");
+    s->addScore(350, "hhh");
+    s->addScore(450, "iii");
+    s->addScore(500, "jjj");
+    s->printScoreBoard();
 }
