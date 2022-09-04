@@ -88,5 +88,25 @@ class Polynomial{
         }
 };
 
+int main(){
+    Polynomial p1; 
+    Polynomial p2; 
+    p1.insert(2, 3); 
+    p1.insert(3, 2); 
+    p1.insert(4, 1); 
+    p1.insert(5, 0); 
+    p2.insert(2, 3); 
+    p2.insert(3, 2); 
+    p2.insert(4, 1); 
+    p2.insert(5, 0); 
+    p1.print(); 
+    p2.print(); 
+    p1.add(p2); 
+    p1.print(); 
+    p1.multiply(p2); 
+    p1.print(); 
+    return 0; 
+}
+
 
 
