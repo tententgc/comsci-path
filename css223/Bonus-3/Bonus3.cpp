@@ -114,5 +114,10 @@ int main()
     s->addScore(350, "hhh");
     s->addScore(450, "iii");
     s->addScore(500, "jjj");
+    
+    s->addScore(460,"gjs");
+    s->addScore(470, "gjs");
     s->printScoreBoard();
 }
+
+//Big O: O(n)
