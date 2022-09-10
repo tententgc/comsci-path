@@ -4,6 +4,7 @@ public class VariableTest{
     int age = 30;
     double height = 1.8;
     boolean isMarried = false;
+    System.out.println(name);
     System.out.println("Name: " + name);
     System.out.println("Age: " + age);
     System.out.println("Height: " + height);   
