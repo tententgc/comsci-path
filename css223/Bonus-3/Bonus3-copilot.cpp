@@ -7,6 +7,7 @@ using namespace std;
 // when add newscore to scoreboard, it will be added to the right position 
 // and the lowest score will be removed 
 // when print scoreboard, it will be printed from highest to lowest score 
+
 struct node 
 { 
     string name; 
