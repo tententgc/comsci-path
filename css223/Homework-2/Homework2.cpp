@@ -4,109 +4,111 @@
 
 using namespace std; 
 
-//creted linked list for create polynomial
-struct Node{
-    int coeff; 
-    int exp; 
-    Node *next; 
-    Node *prev; 
-}; 
+//creted linked list for create polynomia
+//and implemented the method addition and multiplication
 
-class Polynomial{
-    private:
-        Node *head; 
-        Node *tail; 
-    public: 
-        Polynomial(){
-            head = NULL; 
-            tail = NULL; 
+class Node {
+public:
+    int coefficient;
+    int exponent;
+    Node *next;
+    Node(int coefficient, int exponent) {
+        this->coefficient = coefficient;
+        this->exponent = exponent;
+        this->next = NULL;
+    }
+};
+
+class Polynomial {
+public:
+    Node *head;
+    Polynomial() {
+        head = NULL;
+    }
+    void add(int coefficient, int exponent) {
+        Node *newNode = new Node(coefficient, exponent);
+        if (head == NULL) {
+            head = newNode;
+        } else {
+            Node *temp = head;
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
         }
-        void insert(int coeff, int exp){
-            Node *temp = new Node; 
-            temp->coeff = coeff; 
-            temp->exp = exp; 
-            temp->next = NULL; 
-            if(head == NULL){
-                head = temp; 
-                tail = temp; 
+    }
+    void print() {
+        Node *temp = head;
+        while (temp != NULL) {
+            cout << temp->coefficient << "x^" << temp->exponent;
+            if (temp->next != NULL) {
+                cout << " + ";
             }
-            else{
-                tail->next = temp; 
-                tail = temp; 
-            }
+            temp = temp->next;
         }
-        void print(){
-            Node *temp = head; 
-            while(temp != NULL){
-                cout << temp->coeff << "x^" << temp->exp << " + "; 
-                temp = temp->next; 
-            }
-            cout << endl; 
-        }
-        void add(Polynomial p2){
-            Node *temp = head; 
-            Node *temp2 = p2.head; 
-            while(temp != NULL){
-                while(temp2 != NULL){
-                    if(temp->exp == temp2->exp){
-                        temp->coeff = temp->coeff + temp2->coeff; 
-                    }
-                    temp2 = temp2->next; 
-                }
-                temp = temp->next; 
-                temp2 = p2.head; 
-            }
-            temp = head; 
-            while(temp != NULL){
-                if(temp->coeff == 0){
-                    if(temp == head){
-                        head = temp->next; 
-                    }
-                    else if(temp == tail){
-                        tail = temp->prev; 
-                    }
-                    else{
-                        temp->prev->next = temp->next; 
-                        temp->next->prev = temp->prev; 
-                    }
-                }
-                temp = temp->next; 
+        cout << endl;
+    }
+    Polynomial addition(Polynomial p) {
+        Polynomial result;
+        Node *temp1 = head;
+        Node *temp2 = p.head;
+        while (temp1 != NULL && temp2 != NULL) {
+            if (temp1->exponent == temp2->exponent) {
+                result.add(temp1->coefficient + temp2->coefficient, temp1->exponent);
+                temp1 = temp1->next;
+                temp2 = temp2->next;
+            } else if (temp1->exponent > temp2->exponent) {
+                result.add(temp1->coefficient, temp1->exponent);
+                temp1 = temp1->next;
+            } else {
+                result.add(temp2->coefficient, temp2->exponent);
+                temp2 = temp2->next;
             }
         }
-        void multiply(Polynomial p2){
-            Node *temp = head; 
-            Node *temp2 = p2.head; 
-            while(temp != NULL){
-                while(temp2 != NULL){
-                    temp->coeff = temp->coeff * temp2->coeff; 
-                    temp->exp = temp->exp + temp2->exp; 
-                    temp2 = temp2->next; 
-                }
-                temp = temp->next; 
-                temp2 = p2.head; 
-            }
+        while (temp1 != NULL) {
+            result.add(temp1->coefficient, temp1->exponent);
+            temp1 = temp1->next;
         }
+        while (temp2 != NULL) {
+            result.add(temp2->coefficient, temp2->exponent);
+            temp2 = temp2->next;
+        }
+        return result;
+    }
+    Polynomial multiplication(Polynomial p) {
+        Polynomial result;
+        Node *temp1 = head;
+        Node *temp2 = p.head;
+        while (temp1 != NULL) {
+            while (temp2 != NULL) {
+                result.add(temp1->coefficient * temp2->coefficient, temp1->exponent + temp2->exponent);
+                temp2 = temp2->next;
+            }
+            temp1 = temp1->next;
+            temp2 = p.head;
+        }
+        return result;
+    }
 };
 
 int main(){
-    Polynomial p1; 
-    Polynomial p2; 
-    p1.insert(2, 3); 
-    p1.insert(3, 2); 
-    p1.insert(4, 1); 
-    p1.insert(5, 0); 
-    p2.insert(2, 3); 
-    p2.insert(3, 2); 
-    p2.insert(4, 1); 
-    p2.insert(5, 0); 
-    p1.print(); 
-    p2.print(); 
-    p1.add(p2); 
-    p1.print(); 
-    p1.multiply(p2); 
-    p1.print(); 
-    return 0; 
+    Polynomial p1;
+    p1.add(2, 3);
+    p1.add(3, 2);
+    p1.add(4, 1);
+    p1.add(5, 0);
+    p1.print();
+    Polynomial p2;
+    p2.add(1, 2);
+    p2.add(2, 1);
+    p2.add(3, 0);
+    p2.print();
+    Polynomial p3 = p1.addition(p2);
+    p3.print();
+    Polynomial p4 = p1.multiplication(p2);
+    p4.print();
+    return 0;
 }
 
-
-
+// Language: cpp
+// BigO: O(n)
