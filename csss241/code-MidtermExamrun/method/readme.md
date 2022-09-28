@@ -10,3 +10,8 @@
 
 - newton interpolating polynomial
 - lagrange polynomial
+
+
+
+
+### https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html
