@@ -13,3 +13,4 @@ def richardson_diff(x,h=0.75,N=2):
   print(table)
 
   return table[n-1][n-1]
+print(richardson_diff(1.5))
