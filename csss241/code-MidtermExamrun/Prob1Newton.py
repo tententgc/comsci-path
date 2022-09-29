@@ -27,8 +27,9 @@ def newton(x,xi,yi):
 #         p = str(a[n-i]) + " + (" + str(x) + " - " + str(xi[n-i]) + ") * (" + p + ")"
 #     return p
 
-a = (1, 2, 3, -4, 5)
-fa = (2, 48, 272, 1182, 2262)
+
+a = (8, -2, 5)
+fa = (9, 2, 13)
 x = -1
 print(newton(x, a, fa))
 # print(poly(a, fa))
