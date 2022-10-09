@@ -4,8 +4,7 @@
 
 using namespace std; 
 
-//creted linked list for create polynomia
-//and implemented the method addition and multiplication
+
 
 class Node {
 public:
@@ -111,4 +110,4 @@ int main(){
 }
 
 // Language: cpp
-// BigO: O(n)
+// BigO: O(n^2)
