@@ -116,3 +116,5 @@ int main(){
 }
 
 //Big O: O(n)
+// ใช้ Linked list ขอข้อสกอร์บอร์ดที่เป็นโบนัสมาแก้แล้วให้ linked list วนแอดค่า top score ออกมมา
+// input ที่ใส่ตรง Enter top value you want to show : คือ n ตัว ซึ่งไม่เกิน 12 เพราะ ผมสร้าง array เก็บค่า 12 ตัว ก่อนโยนเข้าไป sort
