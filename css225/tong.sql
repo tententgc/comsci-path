@@ -17,6 +17,7 @@ select max(enrollment) from max_enrollment;
 /*1-7*/
 with max_enrollment(course_id, sec_id, enrollment) as (select course_id, sec_id, count(id) from takes where semester = 'Fall' and year = 2009 group by course_id, sec_id)
 select course_id, sec_id, enrollment from max_enrollment where enrollment = (select max(enrollment) from max_enrollment);
+select course_id, sec_id, enrollment from max_enrollment where enrollment = (select max(enrollment) from max_enrollment);
 
 
 

@@ -27,5 +27,3 @@ select course_id, sec_id, enrollment from max_enrollment where enrollment = (sel
 
 
 
-
-
