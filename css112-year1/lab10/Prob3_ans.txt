@@ -1,0 +1,1 @@
+{k:v for (k,v) in dict(zip(range(len(primes)),primes)).items() if k%2 } 
