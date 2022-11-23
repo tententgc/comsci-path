@@ -26,4 +26,10 @@ with max_enrollment(course_id, sec_id, enrollment) as (select course_id, sec_id,
 select course_id, sec_id, enrollment from max_enrollment where enrollment = (select max(enrollment) from max_enrollment);
 
 
+use University2;
+desc course;
+# 2_1
+insert into course(course_id, title, credits) values ("CS-001", 'Weekly Seminar', 0);
+#error เพราะ credit เป็น 0 ไม่ได้
+
 
