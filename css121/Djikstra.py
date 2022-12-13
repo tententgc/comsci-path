@@ -46,7 +46,7 @@ graph = {
 
 
 def dijkstra(graph, start, goal): 
-    shortest_distance = {} #creating a dictionary to store shortest distance
+    shortest_distance = {}
     track_predecessor = {} 
     unseenNodes = graph
     infinity = 9999999
@@ -74,6 +74,7 @@ def dijkstra(graph, start, goal):
                 track_predecessor[child_node] = min_distance_node
 
         unseenNodes.pop(min_distance_node)
+        
     currentNode = goal
     while currentNode != start:
         try:

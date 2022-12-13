@@ -1,0 +1,1 @@
+and i != friend_num:

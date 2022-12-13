@@ -12,8 +12,8 @@ graph = {
     'k': {'h': 3, 'i': 4, 'j': 3}
 }
 
-start, stop = input().split()
 
+start, stop = input().split()
 
 def find_min_paths(start, stop, graph, now=start, path=start, dis=0, min_dis=float('inf'), min_path=""):
     if now == stop:
