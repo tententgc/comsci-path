@@ -1,0 +1,38 @@
+
+#game {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: lightgray;
+}
+
+#message {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 24px;
+}
+
+#reset {
+  margin-top: 10px;
+}

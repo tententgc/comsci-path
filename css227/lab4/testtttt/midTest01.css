@@ -1,0 +1,167 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+
+body {
+    background: linear-gradient(90deg, #4c79c6 0%, #cb473f 100%);
+}
+
+main {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 3%;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    bottom: 20px;
+    left: 50px;
+}
+
+.firstcontent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 50px;
+    margin-top: 15px;
+}
+
+.container-left {
+    padding: 10px;
+    flex: 40%;
+    text-align: left;
+}
+
+.container-right {
+    padding: 10px;
+    flex: 60%;
+}
+
+.ironman {
+    margin-left: 0px;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.image-ironman {
+    height: 30vh;
+    box-shadow: 2px 10px 19px 11px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.5s ease;
+    box-shadow: black 0px 0px 50px 5px;  
+
+}
+
+.image-ironman:hover {
+    z-index: 10;
+    border: 10px solid rgba(255, 2, 2, 0.5);
+    box-shadow: black 0px 0px 50px 10px;
+
+}
+
+#im1 {
+    position: relative;
+    top: 0;
+    left: 0;
+
+}
+
+#im2 {
+    position: absolute;
+    top: 50px;
+    left: 480px;
+}
+
+#im3 {
+    position: absolute;
+    top: 130px;
+    left: 200px;
+}
+
+.secondcontent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 3%;
+}
+
+.secondcontent>div {
+    margin: 15px;
+    padding: 10px;
+    text-align: center;
+    width: 23%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3%;
+}
+
+.secondcontent>div:hover {
+    transform: scale(1.05);
+    transition: 1s;
+    border-radius: 3%;
+}
+
+.icon {
+    width: 50px;
+}
+
+strong {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 768px) {
+    main {
+      position: static;
+      margin: 0 20px;
+    }
+  
+    .firstcontent {
+      flex-direction: column;
+      align-items: center;
+      margin-left: 0;
+    }
+  
+    .container-left {
+      flex: 100%;
+      text-align: center;
+    }
+  
+    .container-right {
+      flex: 100%;
+    }
+  
+    #im1 {
+      position: static;
+    }
+  
+    #im2 {
+      position: static;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    #im3 {
+      position: static;
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  
+    .secondcontent>div {
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 500px) {
+    strong {
+      font-size: 30px;
+    }
+  
+    .icon {
+      width: 30px;
+    }
+  }
+  
