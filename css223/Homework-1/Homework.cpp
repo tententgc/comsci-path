@@ -24,7 +24,7 @@ struct TypeFriend{
 int main()
 { 
     ifstream inFile; 
-    inFile.open("mbti.csv");
+    inFile.open("CSS223-MBTI.csv");
     string line;
     vector<string> lines;
     while (getline(inFile, line)){
@@ -116,7 +116,7 @@ int main()
             myType += "x";
         }
     }
-    cout << "your type is " << myType << endl;
+    cout << "Hi your type is " << myType << endl;
     return 0;
 }
 

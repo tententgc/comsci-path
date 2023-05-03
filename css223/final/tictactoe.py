@@ -1,56 +1,53 @@
-def won(c, n):
-    if c[0] == n and c[1] == n and c[2] == n:
-        return 1
-    if c[3] == n and c[4] == n and c[5] == n:
-        return 1
-    if c[6] == n and c[7] == n and c[8] == n:
-        return 1
-
-    if c[0] == n and c[3] == n and c[6] == n:
-        return 1
-    if c[1] == n and c[4] == n and c[7] == n:
-        return 1
-    if c[2] == n and c[5] == n and c[8] == n:
-        return 1
-
-    if c[0] == n and c[4] == n and c[8] == n:
-        return 1
-    if c[2] == n and c[4] == n and c[6] == n:
-        return 1
-
-    return 0
+def Winner(board):
+    if board[0] == board[1] == board[2] != ' ':
+        return True
+    elif board[3] == board[4] == board[5] != ' ':
+        return True
+    elif board[6] == board[7] == board[8] != ' ':
+        return True
+    elif board[0] == board[3] == board[6] != ' ':
+        return True
+    elif board[1] == board[4] == board[7] != ' ':
+        return True
+    elif board[2] == board[5] == board[8] != ' ':
+        return True
+    elif board[0] == board[4] == board[8] != ' ':
+        return True
+    elif board[2] == board[4] == board[6] != ' ':
+        return True
 
 
-pc = [' ', 'x', 'o']
-c = [0] * 9
-for c[0] in range(3):
-  for c[1] in range(3):
-    for c[2] in range(3):
-      for c[3] in range(3):
-        for c[4] in range(3):
-          for c[5] in range(3):
-            for c[6] in range(3):
-              for c[7] in range(3):
-                for c[8] in range(3):
-                   countx = sum([1 for x in c if x == 1])
-                   county = sum([1 for x in c if x == 2])
-                   if abs(countx - county) < 2:
-                       if won(c, 1) + won(c, 2) == 1 or (won(c, 1) + won(c, 2) == 0 and countx + county == 9):
-                           print(" %s | %s | %s" %
-                                 (pc[c[0]], pc[c[1]], pc[c[2]]))
-                           print("---+---+---")
-                           print(" %s | %s | %s" %
-                                 (pc[c[3]], pc[c[4]], pc[c[5]]))
-                           print("---+---+---")
-                           print(" %s | %s | %s" %
-                                 (pc[c[6]], pc[c[7]], pc[c[8]]))
-                           if won(c, 1):
-                                res = 1
-                                print(res)
-                            elif won(c, 2):
-                                res = -1
-                                print(res)
-                            else:
-                                res = 0
-                                print(res)
-                            print()
+def printBoard(board):
+    print(board[0] + "|" + board[1] + "|" + board[2])
+    print("-----")
+    print(board[3] + "|" + board[4] + "|" + board[5])
+    print("-----")
+    print(board[6] + "|" + board[7] + "|" + board[8])
+    print("----------------------------------------")
+
+
+count = 0
+
+
+def StartGame(board, r):
+    global count
+    if Winner(board) or " " not in board:
+        count += 1
+        printBoard(board)
+        return True
+
+    for i in range(9):
+        if board[i] == " ":
+            if r % 2 == 0:
+                board[i] = "X"
+            else:
+                board[i] = "O"
+            r += 1
+            StartGame(board, r)
+            board[i] = " "
+            r -= 1
+
+
+board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+StartGame(board, 0)
+print(count)
