@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Test 2</title>
+  <style>
+    #buttons {
+      text-align: center;
+    }
+
+    #square {
+      position: absolute;
+      top: 150px;
+      left: 50px;
+      width: 200px;
+      height: 200px;
+      border: 2px solid black;
+      padding: 10px;
+      background-color: #e0e0e0;
+    }
+
+    div {
+      padding: 10px;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <h1>Positioning Elements</h1>
+  <div id="buttons">
+    <button type="button" data-action="left">ซ้าย</button>
+    <button type="button" data-action="right">ขวา</button>
+    <button type="button" data-action="up">ขึ้น</button>
+    <button type="button" data-action="down">ลง</button>
+    <button type="button" data-action="hide">ซ่อน</button>
+    <button type="button" data-action="show">แสดง</button>
+  </div>
+  <hr>
+  <div id="square">
+    กล่องนี้จะขยับจะคำสั่ง
+  </div>
+  <script>
+    const square = document.getElementById('square');
+    const buttons = document.getElementById('buttons');
+
+    function move(direction, min, max, value, delta) {
+      const position = parseInt(square.style[direction]) || value;
+      square.style[direction] = Math.max(min, Math.min(max, position + delta)) + 'px';
+    }
+
+    buttons.addEventListener('click', (event) => {
+      const action = event.target.getAttribute('data-action');
+      if (action === 'up') move('top', 50, 350, 150, -10);
+      if (action === 'down') move('top', 150, 450, 150, 10);
+      if (action === 'left') move('left', 50, 250, 50, -10);
+      if (action === 'right') move('left', 150, 350, 50, 10);
+      if (action === 'hide') square.style.display = 'none';
+      if (action === 'show') square.style.display = 'block';
+    });
+  </script>
+</body>
+
+</html>

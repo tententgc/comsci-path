@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Business Cards</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <style>
+
+      .card {
+        border: 1px solid black;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Business Cards</h1>
+    <div id="card-container"></div>
+    <script>
+      const filePath = 'Test3.txt';
+
+      fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+          const cards = data.split('\n\n').map(card => {
+            const fields = card.split('\n').map(field => field.split(': '));
+            return {
+              name: fields[0][1],
+              email: fields[1][1],
+              address: fields[2][1],
+              phone: fields[3][1]
+            };
+          });
+
+  
+          const cardHtml = cards.map(card => {
+
+            const cardDiv = document.createElement('div');
+            cardDiv.classList.add('card');
+
+
+            const nameHeader = document.createElement('h2');
+            nameHeader.textContent = card.name;
+            cardDiv.appendChild(nameHeader);
+
+        
+            const detailList = document.createElement('ul');
+            cardDiv.appendChild(detailList);
+
+            const emailItem = document.createElement('li');
+            emailItem.innerHTML = `<strong>Email:</strong> ${card.email}`;
+            detailList.appendChild(emailItem);
+
+            const addressItem = document.createElement('li');
+            addressItem.innerHTML = `<strong>Address:</strong> ${card.address}`;
+            detailList.appendChild(addressItem);
+
+            const phoneItem = document.createElement('li');
+            phoneItem.innerHTML = `<strong>Phone:</strong> ${card.phone}`;
+            detailList.appendChild(phoneItem);
+
+            return cardDiv.outerHTML;
+          });
+
+          const cardContainer = document.getElementById('card-container');
+          cardContainer.innerHTML = cardHtml.join('\n');
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>

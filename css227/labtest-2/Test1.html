@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Test 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+
+      .small-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      .small-image.selected {
+        border: 2px solid blue;
+      }
+    </style>
+  </head>
+<body>
+    <h1>Random Quote</h1>
+    <p>Refresh the page to see a new quote.</p>
+    <blockquote id="quote">All cats are black after midnight.</blockquote>
+    <p id="author">Robert A. Heinlein</p>
+    <script>
+      const quotes = [
+        "All cats are black after midnight.",
+        "stupid is as stupid does.",
+        "Life is shit when you need sleeping.",
+        "Mama always said life was like a box of chocolates. You never know what you're gonna get.",
+        "You have to do the best with what God gave you.",
+        "You never know what you're gonna get.",
+        "Life is like a box of chocolates.",
+      ];
+
+      const authors = [
+        "Robert A. Heinlein",
+        "Forrest Gump",
+        "tenten",
+        "God fei",
+        "doraemon",
+        "Inuyasha",
+        "Sesshomarus",
+      ];
+
+      const quoteElement = document.getElementById("quote");
+      const authorElement = document.getElementById("author");
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      quoteElement.textContent = quotes[randomIndex];
+      authorElement.textContent = authors[randomIndex];
+    </script>
+
+
+
+        <h1>Image Gallery</h1>
+    <img id="large-image" src="image-0.jpg" />
+    <div>
+      <img
+        class="small-image selected"
+        src="image-1.jpg"
+        onclick="changeImage(0)"
+      />
+      <img
+        class="small-image"
+        src="image-2.jpg"
+        onclick="changeImage(1)"
+      />
+      <img
+        class="small-image"
+        src="image-3.jpg"
+        onclick="changeImage(2)"
+      />
+    </div>
+    <script>
+      let selectedImageIndex = 0;
+      function changeImage(index) {
+        const smallImages = document.querySelectorAll(".small-image");
+        if (index !== selectedImageIndex) {
+          smallImages[selectedImageIndex].classList.remove("selected");
+          selectedImageIndex = index;
+          smallImages[selectedImageIndex].classList.add("selected");
+        }
+        const largeImage = document.getElementById("large-image");
+        largeImage.src = smallImages[selectedImageIndex].src;
+      }
+    </script>
+
+
+    <p id="last-updated">อัพเดทล่าสุด:</p>
+    <script>
+      const lastUpdatedElement = document.getElementById("last-updated");
+      const lastUpdatedDate = new Date(document.lastModified);
+      lastUpdatedElement.textContent += " " + lastUpdatedDate.toLocaleString();
+    </script>
+
+
+  </body>
+</html>

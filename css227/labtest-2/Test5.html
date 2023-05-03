@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Test 5</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+    <h1>ปุ่ม Go back และ ปุ่ม Go forward</h1>
+    <p>การทำงานของปุ่มจะเหมือนกับปุ่นที่ browser</p>
+    <div>
+      <button type="button">Go Back</button>
+      <button type="button">Go Forward</button>
+    </div>
+    <script>
+      var backButton = document.querySelector('button:first-of-type');
+      var forwardButton = document.querySelector('button:last-of-type');
+      backButton.addEventListener('click', function() {
+        history.back();
+      });
+
+      forwardButton.addEventListener('click', function() {
+        history.forward();
+      });
+    </script>
+  </body>
+</html>

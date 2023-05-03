@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Test 4</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Sorting Name</h1>
+    <p>ใส่ชื่อ โดยชื่อจะไปเรียงในกล่องข้อความด้านล่าง</p>
+    <form name="theform">
+      Name:
+      <input name="newname" size="20">
+      <input type="button" value="Add">
+      <br>
+      <h2>ชื่อที่เรียงแล้ว</h2>
+      <textarea cols="60" rows="10" name="sorted"></textarea>
+    </form>
+    <script>
+      var inputField = document.querySelector('input[name="newname"]');
+      var textarea = document.querySelector('textarea[name="sorted"]');
+
+      inputField.nextElementSibling.addEventListener('click', function() {
+        var sortedNames = textarea.value.trim().split('\n');
+        sortedNames.push(inputField.value.trim());
+        sortedNames.sort();
+        textarea.value = sortedNames.join('\n');
+        inputField.value = '';
+      });
+    </script>
+  </body>
+</html>
